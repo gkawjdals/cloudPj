@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [ai, backend]
+        service: [ai, backend,frontend]
 
     steps:
       - name: Checkout source code
