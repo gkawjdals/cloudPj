@@ -1,11 +1,7 @@
 FROM python:3.10-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
-
-# 기본 작업 디렉토리
 WORKDIR /app
-
-# 리포지토리 업데이트 및 패키지 설치
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         wget curl unzip gnupg ca-certificates \
@@ -16,12 +12,11 @@ RUN apt-get update && \
         libxrandr2 xdg-utils libgbm1 libgtk-3-0 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# JAVA_HOME 설정
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
 
-# requirements 설치
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
 CMD ["python", "app.py"]

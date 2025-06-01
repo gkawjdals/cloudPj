@@ -16,8 +16,7 @@ services:
       - news-network
 
   spring:
-    build:
-      context: ./spring  # spring backend 코드 위치
+    image: gkawjdals/cloud-spring:latest
     container_name: news-backend
     depends_on:
       - db
@@ -31,8 +30,7 @@ services:
       - news-network
 
   ai:
-    build:
-      context: ./ai  # Flask AI 서버 코드 위치
+    image: gkawjdals/cloud-ai:latest
     container_name: ai-news-flask
     depends_on:
       - spring
@@ -43,6 +41,18 @@ services:
       - KEYWORD_URL=https://api.signal.bz/news/realtime
     ports:
       - "5000:5000"
+    networks:
+      - news-network
+
+  frontend:
+    image: gkawjdals/cloud-frontend:latest
+    container_name: news-frontend
+    depends_on:
+      - spring
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+    ports:
+      - "3000:3000"
     networks:
       - news-network
 
