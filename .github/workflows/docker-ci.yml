@@ -25,12 +25,12 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Give execute permission to gradlew
-        if: matrix.service == 'spring'
-        run: chmod +x ./spring/gradlew
+        if: matrix.service == 'backend'
+        run: chmod +x ./backend/gradlew
 
       - name: Build Spring JAR
-        if: matrix.service == 'spring'
-        working-directory: ./spring
+        if: matrix.service == 'backend'
+        working-directory: ./backend
         run: ./gradlew bootJar
 
       - name: Build and push Docker image for ${{ matrix.service }}

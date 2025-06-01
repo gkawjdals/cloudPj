@@ -16,7 +16,7 @@ services:
       - news-network
 
   spring:
-    image: gkawjdals/cloud-spring:latest
+    image: gkawjdals/cloud-backend:latest
     container_name: news-backend
     depends_on:
       - db
