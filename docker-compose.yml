@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    container_name: news-db
+    environment:
+      POSTGRES_DB: newsdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 4236
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - news-network
+
+  spring:
+    build:
+      context: ./spring  # spring backend 코드 위치
+    container_name: news-backend
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://news-db:5432/newsdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 4236
+    ports:
+      - "8080:8080"
+    networks:
+      - news-network
+
+  ai:
+    build:
+      context: ./ai  # Flask AI 서버 코드 위치
+    container_name: ai-news-flask
+    depends_on:
+      - spring
+    environment:
+      - API_URL=http://spring:8080/api/summaries
+      - ID=KVztVt2K9FcNLM_8kXLD
+      - SECRET_KEY=UCd_GtcK7T
+      - KEYWORD_URL=https://api.signal.bz/news/realtime
+    ports:
+      - "5000:5000"
+    networks:
+      - news-network
+
+volumes:
+  pgdata:
+
+networks:
+  news-network:

@@ -1,0 +1,42 @@
+# 가상환경 폴더 제외
+venv/
+venvy/
+
+# 환경변수 파일 제외 (보안 및 불필요)
+.env
+
+# IDE 설정 폴더 및 파일 제외
+.idea/
+*.iml
+
+# 파이썬 캐시 및 임시 파일 제외
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 로그 파일 및 임시 파일 제외
+*.log
+*.swp
+*.bak
+
+# 운영에 필요없는 테스트/문서 폴더 제외
+tests/
+test/
+docs/
+
+# MacOS 임시 파일 제외
+.DS_Store
+
+# 빌드 결과물 제외 (필요시)
+build/
+dist/
+
+# 압축 파일 제외
+*.zip
+*.tar.gz
+*.tar
+*.rar
+
+# 기타 불필요한 파일/폴더
+*.egg-info/

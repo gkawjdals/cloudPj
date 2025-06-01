@@ -1,0 +1,8 @@
+# 디폴트 무시된 파일
+/../../../:AI2/.idea/shelf/
+/../../../:AI2/.idea/workspace.xml
+# 에디터 기반 HTTP 클라이언트 요청
+/../../../:AI2/.idea/httpRequests/
+# Datasource local storage ignored files
+/../../../:AI2/.idea/dataSources/
+/../../../:AI2/.idea/dataSources.local.xml
