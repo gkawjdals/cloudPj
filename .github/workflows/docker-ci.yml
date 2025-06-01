@@ -12,7 +12,7 @@ jobs:
         service: [ai, spring]
 
     steps:
-      - name: Checkout repository
+      - name: Checkout source code
         uses: actions/checkout@v2
 
       - name: Set up Docker Buildx
@@ -24,7 +24,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push ${{ matrix.service }} Docker image
+      - name: Build Spring JAR
+        if: matrix.service == 'spring'
+        working-directory: ./spring
+        run: ./gradlew bootJar
+
+      - name: Build and push Docker image for ${{ matrix.service }}
         uses: docker/build-push-action@v4
         with:
           context: ./${{ matrix.service }}
