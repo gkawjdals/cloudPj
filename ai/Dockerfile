@@ -23,9 +23,5 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 # requirements 설치
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
-# 앱 코드 복사
 COPY . .
-
-# 앱 실행
 CMD ["python", "app.py"]
