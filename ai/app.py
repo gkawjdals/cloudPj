@@ -10,7 +10,7 @@ import time
 from dotenv import load_dotenv
 import os
 import html
-from combined_summary import combined_summarize  # 기존에 있던 요약 함수 임포트
+from combined_summary import combined_summarize
 
 load_dotenv()
 

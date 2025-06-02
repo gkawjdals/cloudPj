@@ -17,6 +17,8 @@ services:
 
   spring:
     image: gkawjdals/cloud-backend:latest
+    build:
+      context: ./backend
     container_name: news-backend
     depends_on:
       - db
@@ -31,6 +33,8 @@ services:
 
   ai:
     image: gkawjdals/cloud-ai:latest
+    build:
+      context: ./ai
     container_name: ai-news-flask
     depends_on:
       - spring
@@ -46,6 +50,8 @@ services:
 
   frontend:
     image: gkawjdals/cloud-frontend:latest
+    build:
+      context: ./frontend
     container_name: news-frontend
     depends_on:
       - spring

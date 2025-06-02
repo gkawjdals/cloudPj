@@ -40,7 +40,7 @@ def split_sentences_to_paragraphs(sentences, n=3):
     paragraphs = []
     for i in range(0, len(sentences), n):
         chunk = sentences[i:i+n]
-        if len(chunk) == n:  # 3문장 미만은 포함하지 않음
+        if len(chunk) == n:
             paragraph = ' '.join(chunk)
             paragraphs.append(paragraph)
     return paragraphs
@@ -97,7 +97,7 @@ def summarize_article_debug(article_text):
 
     print("\n🧪 [2단계] 클러스터 분포:")
     for i in range(3):
-        print(f"  클러스터 {i}: {len(clustered[i])} 문단")
+        print(f"클러스터 {i}: {len(clustered[i])} 문단")
 
     tokenizer = PreTrainedTokenizerFast.from_pretrained("digit82/kobart-summarization")
     model = BartForConditionalGeneration.from_pretrained("digit82/kobart-summarization")
@@ -111,15 +111,15 @@ def summarize_article_debug(article_text):
 
         if not cluster_text.strip():
             summary_result.append(f"{i+1}. (요약 불가)")
-            print(" ⛔️ 입력 없음")
+            print("입력 없음")
         else:
             try:
                 summary = summarize(cluster_text, model, tokenizer)
                 summary_result.append(f"{i+1}. {summary}")
-                print(f"  ✅ 요약 결과: {summary}")
+                print(f"요약 결과: {summary}")
             except Exception as e:
                 summary_result.append(f"{i+1}. (요약 실패: {str(e)[:50]}...)")
-                print(f"  ❌ 에러: {str(e)}")
+                print(f"에러: {str(e)}")
 
     return summary_result
 
